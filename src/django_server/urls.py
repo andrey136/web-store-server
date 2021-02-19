@@ -16,11 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include                 # add this
 from rest_framework import routers                    # add this
-from products import views                            # add this
+from products import views
+from products.views import home_view
+from products.views import get_img_view
 
 router = routers.DefaultRouter()                      # add this
 router.register(r'products', views.ProductView, 'product')     # add this
 
 urlpatterns = [
-    path('admin/', admin.site.urls),         path('api/', include(router.urls))                # add this
+    path('home/', home_view),
+    path('products/fridge.jpg', get_img_view),
+    path('admin/', admin.site.urls),
+    path('api/', include(router.urls))                # add this
 ]
